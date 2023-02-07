@@ -6,6 +6,9 @@ package org.mps.ajnebro.factorial ;
  * @author Antonio J. Nebro
  */
 public class Factorial {
+  void h() {
+    // sdfsdf
+  }
   public int compute(int value) {
     int result ;
     if (value < 0) {
