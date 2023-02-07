@@ -8,6 +8,12 @@ import java.math.BigInteger;
  * @author Antonio J. Nebro
  */
 public class Factorial {
+  /**
+   * Method using ints
+   *
+   * @param value
+   * @return the factorial of value
+   */
   public int compute(int value) {
     if (value < 0) {
       throw new NegativeValueException("The value " + value + " is negative");
@@ -19,6 +25,12 @@ public class Factorial {
     return result;
   }
 
+  /**
+   * Method using class {@link BigInteger}
+   *
+   * @param value
+   * @return the factorial of value
+   */
   public BigInteger computeBigValue(int value) {
     if (value < 0) {
       throw new NegativeValueException("The value " + value + " is negative");
