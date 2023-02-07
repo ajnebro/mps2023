@@ -1,12 +1,5 @@
 package org.mps.ajnebro.factorial;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 /*
   Test cases
   1. factorial 0 -> 1
@@ -14,7 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
   3. foctorial 2 -> 2
   4. factorial 3 -> 6
   5. factorial 5 -> 120
+  6. factorial of a negative value -> ??
+  7. factorial of a bit number -> ??
  */
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FactorialTest {
   Factorial factorial  ;
@@ -67,5 +69,10 @@ class FactorialTest {
     int expectedValue = 120 ;
 
     assertEquals(expectedValue, obtainedValue) ;
+  }
+
+  @Test
+  void factorialOfMinusOneIs() {
+    assertThrows(NegativeValueException.class, () -> factorial.compute(-1)) ;
   }
 }
