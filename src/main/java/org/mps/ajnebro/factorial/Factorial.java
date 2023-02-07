@@ -1,5 +1,10 @@
 package org.mps.ajnebro.factorial ;
 
+/**
+ * Class providing a method to compute the factorial of an integer number
+ *
+ *
+ */
 public class Factorial {
   public int compute(int value) {
     int result ;
