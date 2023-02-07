@@ -1,6 +1,7 @@
 package org.mps.ajnebro.factorial ;
 
 /**
+ * Class providing a method to compute the factorial of an integer number
  *
  * @author Antonio J. Nebro
  */
