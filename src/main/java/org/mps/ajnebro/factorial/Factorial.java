@@ -1,5 +1,9 @@
 package org.mps.ajnebro.factorial ;
 
+/**
+ *
+ * @author Antonio J. Nebro
+ */
 public class Factorial {
   public int compute(int value) {
     int result ;
