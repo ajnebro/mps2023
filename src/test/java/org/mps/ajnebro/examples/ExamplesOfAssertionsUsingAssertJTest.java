@@ -20,8 +20,7 @@ public class ExamplesOfAssertionsUsingAssertJTest {
             .hasSize(5);
 
     double[] expectedArray = new double[]{1.0, 5.0, 5.2};
-    assertThat(expectedArray).isEqualTo(new double[]{1.0, 5.0, 5.2});
-    assertThat(expectedArray)
+    assertThat(expectedArray).isEqualTo(new double[]{1.0, 5.0, 5.2})
             .contains(5.0)
             .containsAnyOf(1.0, 2.0);
 
