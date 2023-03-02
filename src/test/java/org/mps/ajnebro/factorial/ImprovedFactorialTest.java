@@ -67,7 +67,7 @@ class ImprovedFactorialTest {
   @DisplayName("when the compute() method is called")
   class TestCasesForIntValues {
     @ParameterizedTest
-    @DisplayName("valid results are obtained")
+    @DisplayName("valid results are obtained for values 0, 1, 2, 3, 4, 5, 12")
     @CsvSource({
         "0, 1",
         "1, 1",
@@ -96,7 +96,8 @@ class ImprovedFactorialTest {
   @EnabledForJreRange(min = JAVA_8, max = JAVA_21)
   class TestCasesForBigIntegerResults {
 
-    @DisplayName("valid results are obtained for values lower than 13")
+    @Test
+    @DisplayName("valid results are obtained for values 0, 1, 2, 3, 4, 5, 12")
     void computeBigValueMethodReturnsValidResults() {
       List<Integer> values = List.of(0, 1, 2, 3, 5, 12);
       List<BigInteger> expectedResults = Stream.of(1, 1, 2, 6, 120, 479001600).map(
