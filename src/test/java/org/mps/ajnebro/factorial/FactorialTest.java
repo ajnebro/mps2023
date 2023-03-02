@@ -4,11 +4,11 @@ package org.mps.ajnebro.factorial;
   Test cases
   1. factorial 0 -> 1
   2. factorial 1 -> 1
-  3. foctorial 2 -> 2
+  3. factorial 2 -> 2
   4. factorial 3 -> 6
   5. factorial 5 -> 120
-  6. factorial of a negative value -> ??
-  7. factorial of a bit number -> ??
+  6. factorial of a negative value -> raises an exception
+  7. factorial of a big number -> raises an exception
  */
 
 import org.junit.jupiter.api.AfterEach;
@@ -74,5 +74,10 @@ class FactorialTest {
   @Test
   void factorialOfMinusOneIs() {
     assertThrows(NegativeValueException.class, () -> factorial.compute(-1)) ;
+  }
+
+  @Test
+  void factorialOf12() {
+    assertThrows(ParameterValueCausesOverflow.class, () -> factorial.compute(13)) ;
   }
 }

@@ -4,7 +4,7 @@ package org.mps.ajnebro.factorial;
   Test cases
   1. factorial 0 -> 1
   2. factorial 1 -> 1
-  3. foctorial 2 -> 2
+  3. factorial 2 -> 2
   4. factorial 3 -> 6
   5. factorial 5 -> 120
   6. factorial of a negative value -> ??
