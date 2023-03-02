@@ -39,7 +39,7 @@ public class Factorial {
     BigInteger result;
     result = BigInteger.ONE;
     for (int i = 2; i <= value; i++) {
-      result = result.multiply(BigInteger.valueOf(value));
+      result = result.multiply(BigInteger.valueOf(i));
     }
 
     return result;

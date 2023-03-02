@@ -47,6 +47,7 @@ class FactorialTest {
     assertEquals(expectedValue, obtainedValue) ;
   }
 
+  @Test
   void factorialOfTwoIsTwo() {
     int obtainedValue = factorial.compute(2) ;
     int expectedValue = 2 ;

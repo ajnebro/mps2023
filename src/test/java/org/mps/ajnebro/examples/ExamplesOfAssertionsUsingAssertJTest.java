@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.* ;
 
 
-public class ExamplesOfAssertionsUsingAssertJ {
+public class ExamplesOfAssertionsUsingAssertJTest {
   @Test
   void examplesOfAssertions() {
     assertThat(4.0).isEqualTo(3.0 + 1.0);
