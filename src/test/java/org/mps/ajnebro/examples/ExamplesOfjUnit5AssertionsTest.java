@@ -1,11 +1,18 @@
 package org.mps.ajnebro.examples ;
 
-import org.junit.jupiter.api.Test;
-import org.mps.ajnebro.factorial.Factorial;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.mps.ajnebro.factorial.Factorial;
 
 public class ExamplesOfjUnit5AssertionsTest {
   private double EPSILON = 0.0000001;

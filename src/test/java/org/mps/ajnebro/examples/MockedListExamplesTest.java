@@ -1,14 +1,10 @@
 package org.mps.ajnebro.examples;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class MockedListExamplesTest {
 

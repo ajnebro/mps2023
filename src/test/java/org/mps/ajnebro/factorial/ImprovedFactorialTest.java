@@ -7,138 +7,132 @@ package org.mps.ajnebro.factorial;
   3. factorial 2 -> 2
   4. factorial 3 -> 6
   5. factorial 5 -> 120
-  6. factorial of a negative value -> ??
-  7. factorial of a bit number -> ??
+  6. factorial 12 -> 479001600
+  7. factorial of a negative value -> raises an exception
+  8. factorial of a big number -> raises an exception
+
+  Extended cases when using BigInteger
+  9. factorial of 13 ->  6227020800
+  10. factorial of 18 -> 6402373705728000
+
+  https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested
+  https://github.com/fabriciorby/maven-surefire-junit5-tree-reporter
  */
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.EnabledForJreRange;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.condition.JRE.JAVA_21;
 import static org.junit.jupiter.api.condition.JRE.JAVA_8;
 
+import java.math.BigInteger;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 class ImprovedFactorialTest {
+
   Factorial factorial;
 
-  @BeforeEach
-  void setup() {
-    factorial = new Factorial();
+  @Nested
+  @DisplayName("Test cases for the compute() method")
+  class TestCasesForIntValues {
+
+    @BeforeEach
+    void setup() {
+      factorial = new Factorial();
+    }
+
+    @ParameterizedTest
+    @DisplayName("Test cases for the compute() method that check expected valid results")
+    @CsvSource({
+        "0, 1",
+        "1, 1",
+        "2, 2",
+        "3, 6",
+        "5, 120",
+        "12, 479001600"
+    })
+    void theComputeMethodReturnsAValidResult(int number, int expectedValue) {
+      int actualValue = factorial.compute(number);
+      assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    void testThrownExceptions() {
+      assertAll(
+          "Test thrown exceptions",
+          () -> assertThrows(NegativeValueException.class, () -> factorial.compute(-1)),
+          () -> assertThrows(ParameterValueCausesOverflow.class, () -> factorial.compute(13)));
+    }
+
+    @AfterEach
+    void shutdown() {
+      factorial = null;
+    }
   }
 
-  @AfterEach
-  void shutdown() {
-    factorial = null;
-  }
-
-  /*
-  @ParameterizedTest
-  @ValueSource(ints= { 20, 100, Integer.MAX_VALUE, 1000000 })
- public void should_throw_exception_factorial_of_values_that_overflows(int candidate) {
-    Assertions.assertThrows(RuntimeException.class, ()-> factorial.compute(candidate));
-
-}
-   */
-
-
-  @ParameterizedTest
-  @DisplayName("Factorial del método computeBigInteger para valores básicos positivos es correcto")
-  @CsvSource({
-          "0, 1",
-          "1, 1",
-          "2, 2",
-          "3, 6",
-          "5, 120"
-  })
-  void bigIntegerFactorialIsCorrect(int number, BigInteger expectedValue) {
-    BigInteger obtainedValue = factorial.computeBigValue(number);
-    assertEquals(expectedValue, obtainedValue);
-  }
-
-  @Test
+  @Nested
+  @DisplayName("Test cases for the computeBigValue() method")
   @EnabledForJreRange(min = JAVA_8, max = JAVA_21)
-  /*
-  @EnabledOnOs(OS.WINDOWS)
-  @EnabledOnOs({OS.MAC,OS.LINUX})
-  @DisabledOnOs(OS.WINDOWS)
-  */
-  void factorialOf13IsTooLarge() {
-    assertThrows(RuntimeException.class, ()->factorial.compute(13));
-  }
+  class TestCasesForBigIntegerResults {
 
+    @BeforeEach
+    void setup() {
+      factorial = new Factorial();
+    }
 
-  @Test
-  void factorialOf7Is5040OnBothImplementations() {
-    int expectedValue = 5040;
-    assertAll(() -> {
-      int actualValue = factorial.compute(7);
-      assertEquals(expectedValue,actualValue);
-    }, () -> {
-      BigInteger actualValue = factorial.computeBigValue(7);
-      assertEquals(BigInteger.valueOf(expectedValue),actualValue);
-    });
-  }
+    @ParameterizedTest
+    @DisplayName("Test cases for the computeBigValue() method that check expected valid results")
+    @CsvSource({
+        "0, 1",
+        "1, 1",
+        "2, 2",
+        "3, 6",
+        "5, 120",
+        "12, 479001600",
+        "13, 6227020800",
+        "18, 6402373705728000"
+    })
+    void computeBigValueMethodReturnsValidResults(int number, BigInteger expectedValue) {
+      List<Integer> values = List.of(0, 1, 2, 3, 5, 12);
+      List<BigInteger> expectedResults = Stream.of(1, 1, 2, 6, 120, 479001600).map(
+          BigInteger::valueOf).collect(
+          Collectors.toList());
 
-  @Test
-  void factorialOf6_7_8_9Returns720_5040_40320_362880(){
-    Iterable<Integer> expectedValues = new ArrayList<>(asList(720, 5040, 40320, 362880));
-    Iterable<Integer> obtainedValues = new LinkedList<>(asList(factorial.compute(6), factorial.compute(7), factorial.compute(8), factorial.compute(9)));
-    assertIterableEquals(expectedValues, obtainedValues);
-  }
+      List<BigInteger> actualValues = values.stream().map(i -> factorial.computeBigValue(i))
+          .collect(Collectors.toList());
 
+      assertIterableEquals(expectedResults, actualValues);
+    }
 
-  @Test
-  void factorialOfZeroIsOne() {
-    int obtainedValue = factorial.compute(0);
-    int expectedValue = 1;
+    @ParameterizedTest
+    @DisplayName("Test cases for the computeBigValue() method with high paramater values")
+    @CsvSource({
+        "13, 6227020800.0",
+        "18, 6402373705728000.0"
+    })
+    void computeBigValueReturnTheExceptedResult(int number, double expectedValue) {
+      assertEquals(expectedValue, factorial.computeBigValue(number).doubleValue());
+    }
 
-    assertEquals(expectedValue, obtainedValue);
-  }
+    @Test
+    void factorialOfMinusOneRaisesAnException() {
+      assertThrows(NegativeValueException.class, () -> factorial.computeBigValue(-1));
+    }
 
-  @Test
-  void factorialOfOneIsOne() {
-    int obtainedValue = factorial.compute(1);
-    int expectedValue = 1;
-
-    assertEquals(expectedValue, obtainedValue);
-  }
-
-  void factorialOfTwoIsTwo() {
-    int obtainedValue = factorial.compute(2);
-    int expectedValue = 2;
-
-    assertEquals(expectedValue, obtainedValue);
-  }
-
-  @Test
-  void factorialOf3Is6() {
-    int obtainedValue = factorial.compute(3);
-    int expectedValue = 6;
-
-    assertEquals(expectedValue, obtainedValue);
-  }
-
-  @Test
-  void factorialOf5Is120() {
-    int obtainedValue = factorial.compute(5);
-    int expectedValue = 120;
-
-    assertEquals(expectedValue, obtainedValue);
-  }
-
-  @Test
-  void factorialOfMinusOneIs() {
-    assertThrows(NegativeValueException.class, () -> factorial.compute(-1));
+    @AfterEach
+    void shutdown() {
+      factorial = null;
+    }
   }
 }

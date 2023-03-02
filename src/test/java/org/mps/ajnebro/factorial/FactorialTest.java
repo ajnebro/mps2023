@@ -11,12 +11,12 @@ package org.mps.ajnebro.factorial;
   7. factorial of a big number -> raises an exception
  */
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FactorialTest {
   Factorial factorial  ;
@@ -72,12 +72,12 @@ class FactorialTest {
   }
 
   @Test
-  void factorialOfMinusOneIs() {
+  void factorialOfMinusOneRaisesAnException() {
     assertThrows(NegativeValueException.class, () -> factorial.compute(-1)) ;
   }
 
   @Test
-  void factorialOf12() {
+  void factorialOf13RaisesAndException() {
     assertThrows(ParameterValueCausesOverflow.class, () -> factorial.compute(13)) ;
   }
 }
