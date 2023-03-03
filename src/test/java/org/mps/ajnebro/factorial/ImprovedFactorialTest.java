@@ -91,19 +91,9 @@ class ImprovedFactorialTest {
       factorial = new Factorial();
     }
 
-    @ParameterizedTest
+    @Test
     @DisplayName("Test cases for the computeBigValue() method that check expected valid results")
-    @CsvSource({
-        "0, 1",
-        "1, 1",
-        "2, 2",
-        "3, 6",
-        "5, 120",
-        "12, 479001600",
-        "13, 6227020800",
-        "18, 6402373705728000"
-    })
-    void computeBigValueMethodReturnsValidResults(int number, BigInteger expectedValue) {
+    void computeBigValueMethodReturnsValidResults() {
       List<Integer> values = List.of(0, 1, 2, 3, 5, 12);
       List<BigInteger> expectedResults = Stream.of(1, 1, 2, 6, 120, 479001600).map(
           BigInteger::valueOf).collect(
