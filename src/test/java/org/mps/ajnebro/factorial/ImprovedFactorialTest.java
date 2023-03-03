@@ -29,7 +29,6 @@ import static org.junit.jupiter.api.condition.JRE.JAVA_8;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.Stack;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
@@ -42,7 +41,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 
-@DisplayName("An instance of Factorial ")
+@DisplayName("Class Factorial ")
 class ImprovedFactorialTest {
   Factorial factorial;
 
