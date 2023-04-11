@@ -40,9 +40,15 @@ import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+/**
+ * Unit tests for class {@link Factorial}
+ *
+ *  @author Antonio J. Nebro
+ */
 
 @DisplayName("Class Factorial ")
 class ImprovedFactorialTest {
+
   Factorial factorial;
 
   @Test
@@ -65,6 +71,7 @@ class ImprovedFactorialTest {
   @Nested
   @DisplayName("when the compute() method is called")
   class TestCasesForIntValues {
+
     @ParameterizedTest
     @DisplayName("valid results are obtained for values 0, 1, 2, 3, 4, 5, 12")
     @CsvSource({
