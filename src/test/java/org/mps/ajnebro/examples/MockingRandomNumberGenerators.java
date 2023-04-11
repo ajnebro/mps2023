@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 
-public class MockingRandomNumberGenerators {
+class MockingRandomNumberGenerators {
   @Test
   void mockingARandomGenerator() {
     // STEP 1: create mock object
